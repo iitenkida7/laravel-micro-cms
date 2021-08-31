@@ -1,0 +1,26 @@
+{
+    "name": "iitenkida7/micro-cms",
+    "description": "MicroCMS API wrapper",
+    "type": "laravel-plugin",
+    "require": {
+        "no": "0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Iitenkida7\\MicroCms\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "iitenkida7",
+            "email": "i.takeshi2222@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+          "providers": [
+            "Iitenkida7\\MicroCms\\MicroCMSServiceProvider"
+          ]
+        }
+    }
+}
