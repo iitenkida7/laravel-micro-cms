@@ -3,7 +3,7 @@
     "description": "MicroCMS API wrapper",
     "type": "laravel-plugin",
     "require": {
-        "no": "0.1"
+        "no": "1.1"
     },
     "autoload": {
         "psr-4": {
