@@ -7,7 +7,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Iitenkida7\\MicroCms\\": "src/"
+            "Iitenkida7\\MicroCMS\\": "src/"
         }
     },
     "authors": [
@@ -19,7 +19,7 @@
     "extra": {
         "laravel": {
           "providers": [
-            "Iitenkida7\\MicroCms\\MicroCMSServiceProvider"
+            "Iitenkida7\\MicroCMS\\MicroCMSServiceProvider"
           ]
         }
     }
