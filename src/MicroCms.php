@@ -4,25 +4,24 @@ namespace Iitenkida7\MicroCms;
 
 class MicroCms
 {
-    protected BuildQuery $buildQuery;
-
     protected Convert $convert;
 
     protected Client $client;
 
-    public function __construct(BuildQuery $buildQuery, Client $client, Convert $convert)
+    public function __construct(Client $client, Convert $convert)
     {
         $this->client = $client;
-        $this->buildQuery = $buildQuery;
         $this->convert = $convert;
     }
 
-    public function demo()
+    public function get(string $schema, BuildQuery $buildQuery)
     {
-        $this->buildQuery->limit = 1;
-        $this->buildQuery->orders = '-updatedAt';
-        $result = ($this->client->schema('news')->get());
+        // @todo:こんな感じで扱えるようにする。
+        //$response = ($this->client->schema($schema)->get($buildQuery));
 
-        dd($this->convert->get($result));
+        $this->buildQuery = $buildQuery;
+        $response = ($this->client->schema($schema)->get());
+
+        return $this->convert->get($response);
     }
 }
