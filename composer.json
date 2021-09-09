@@ -1,5 +1,5 @@
 {
-    "name": "iitenkida7/micro-cms",
+    "name": "iitenkida7/laravel-micro-cms",
     "description": "MicroCms API wrapper",
     "type": "laravel-plugin",
     "require": {
