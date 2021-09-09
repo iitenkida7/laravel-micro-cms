@@ -1,6 +1,6 @@
 <?php
 
-namespace Iitenkida7\MicroCMS;
+namespace Iitenkida7\MicroCms;
 
 use Carbon\CarbonImmutable as Carbon;
 

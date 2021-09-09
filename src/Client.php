@@ -1,6 +1,6 @@
 <?php
 
-namespace Iitenkida7\MicroCMS;
+namespace Iitenkida7\MicroCms;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;

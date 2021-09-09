@@ -1,8 +1,8 @@
 <?php
 
-namespace Iitenkida7\MicroCMS;
+namespace Iitenkida7\MicroCms;
 
-class MicroCMS
+class MicroCms
 {
     protected BuildQuery $buildQuery;
 
