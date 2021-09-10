@@ -2,7 +2,7 @@
 
 namespace Iitenkida7\MicroCms;
 
-class BuildQuery
+class QueryBuilder
 {
     protected array $conditions;
 

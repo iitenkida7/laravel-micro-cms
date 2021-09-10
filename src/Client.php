@@ -17,14 +17,14 @@ class Client
 
     protected string $schema;
 
-    protected BuildQuery $buildQuery;
+    protected QueryBuilder $queryBuilder;
 
-    public function __construct(BuildQuery $buildQuery)
+    public function __construct(QueryBuilder $queryBuilder)
     {
         $this->endpoint = config('micro-cms.api_endpoint');
         $this->apiKey = config('micro-cms.api_key');
         $this->http = Http::withHeaders(['X-API-KEY' => $this->apiKey]);
-        $this->buildQuery = $buildQuery;
+        $this->queryBuilder = $queryBuilder;
     }
 
     public function schema(string $schema)
@@ -40,7 +40,7 @@ class Client
 
     public function get()
     {
-        $query = http_build_query($this->buildQuery->getConditions());
+        $query = http_build_query($this->queryBuilder->getConditions());
 
         $response = $this->http->get($this->endpoint . $this->schema . '?' . $query)->collect();
 
