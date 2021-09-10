@@ -3,6 +3,7 @@
 namespace Iitenkida7\MicroCms;
 
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
 class Client
@@ -19,31 +20,29 @@ class Client
 
     protected QueryBuilder $queryBuilder;
 
-    public function __construct(QueryBuilder $queryBuilder)
+    public function __construct()
     {
         $this->endpoint = config('micro-cms.api_endpoint');
         $this->apiKey = config('micro-cms.api_key');
         $this->http = Http::withHeaders(['X-API-KEY' => $this->apiKey]);
-        $this->queryBuilder = $queryBuilder;
     }
 
-    public function schema(string $schema)
+    public function schema(string $schema): self
     {
         $this->schema = $schema;
         return $this;
     }
 
-    public function setTimeout(int $timeout)
+    public function setTimeout(int $timeout): self
     {
         $this->http = $this->http->timeout($timeout);
+        return $this;
     }
 
-    public function get()
+    public function get(QueryBuilder $queryBuilder): Collection
     {
-        $query = http_build_query($this->queryBuilder->getConditions());
+        $query = http_build_query($queryBuilder->getConditions());
 
-        $response = $this->http->get($this->endpoint . $this->schema . '?' . $query)->collect();
-
-        return $response;
+        return $this->http->get($this->endpoint . $this->schema . '?' . $query)->collect();
     }
 }

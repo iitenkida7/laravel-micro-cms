@@ -2,13 +2,13 @@
 
 namespace Iitenkida7\MicroCms;
 
+use Illuminate\Support\Collection;
+
 class MicroCms
 {
     protected Convert $convert;
 
     protected Client $client;
-
-    protected QueryBuilder $queryBuilder;
 
     public function __construct(Client $client, Convert $convert)
     {
@@ -16,14 +16,9 @@ class MicroCms
         $this->convert = $convert;
     }
 
-    public function get(string $schema, QueryBuilder $queryBuilder)
+    public function get(string $schema, QueryBuilder $queryBuilder): Collection
     {
-        // @todo:こんな感じで扱えるようにする。
-        //$response = ($this->client->schema($schema)->get($buildQuery));
-
-        $this->queryBuilder = $queryBuilder;
-        $response = ($this->client->schema($schema)->get());
-
+        $response = $this->client->schema($schema)->get($queryBuilder);
         return $this->convert->get($response);
     }
 }

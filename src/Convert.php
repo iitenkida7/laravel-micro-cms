@@ -3,6 +3,7 @@
 namespace Iitenkida7\MicroCms;
 
 use Carbon\CarbonImmutable as Carbon;
+use Illuminate\Support\Collection;
 
 class Convert
 {
@@ -15,7 +16,7 @@ class Convert
         return $input;
     }
 
-    private function convertContent($content): object
+    private function convertContent($content): Collection
     {
         $result = collect();
 
@@ -26,6 +27,7 @@ class Convert
                 $result->{$key} = $value;
             }
         }
+
         return $result;
     }
 
