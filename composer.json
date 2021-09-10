@@ -20,7 +20,10 @@
         "laravel": {
           "providers": [
             "Iitenkida7\\MicroCms\\MicroCmsServiceProvider"
-          ]
+          ],
+          "aliases": {
+            "MicroCms": "Iitenkida7\\MicroCms\\Facade\\MicroCms"
+          }
         }
     }
 }

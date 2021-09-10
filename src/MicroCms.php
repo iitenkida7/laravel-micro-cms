@@ -10,10 +10,10 @@ class MicroCms
 
     protected Client $client;
 
-    public function __construct(Client $client, Convert $convert)
+    public function __construct()
     {
-        $this->client = $client;
-        $this->convert = $convert;
+        $this->client = new Client();
+        $this->convert = new Convert();
     }
 
     public function get(string $schema, QueryBuilder $queryBuilder): Collection
