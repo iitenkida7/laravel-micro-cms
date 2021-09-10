@@ -3,6 +3,7 @@
     "description": "MicroCms API wrapper",
     "type": "laravel-plugin",
     "require": {
+        "php": "^7.4 || ^8.0",
         "laravel/framework": "8.*"
     },
     "autoload": {
