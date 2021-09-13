@@ -23,3 +23,9 @@
 }
 ```
 
+* Add params in .env
+
+```.env
+MICRO_CMS_API_KEY="X-API-KEY"
+MICRO_CMS_API_ENDPOINT="https://you-are-endpoint.microcms.io/api/v1/"
+```
