@@ -2,9 +2,8 @@
 
 namespace Iitenkida7\MicroCms;
 
-use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use Illuminate\Support\Collection;
 
 class MicroCms
 {
@@ -26,32 +25,29 @@ class MicroCms
 
     public function getWithPaginate(string $schema, QueryBuilder $queryBuilder): LengthAwarePaginator
     {
-        // @todo: has bugs
-        $queryBuilder->limit = 1;
-        $queryBuilder->offset = $this->getOffsetOrFail($queryBuilder->limit);
+        $currentPage = (int) request()->page;
+
+        $queryBuilder->limit = 2;
+        $queryBuilder->offset = $this->getOffsetOrFail($queryBuilder->limit, $currentPage);
 
         $response = $this->get($schema, $queryBuilder);
 
-        $paginator = new LengthAwarePaginator(
+        return new LengthAwarePaginator(
             $response['contents'],
             $response['totalCount'],
             $response['limit'],
-            $response['offset'],
+            $currentPage,
         );
-
-        return $paginator;
     }
 
-    private function getOffsetOrFail(int $limit): int
+    private function getOffsetOrFail(int $limit, int $currentPage): int
     {
-        if (is_numeric(request()->page) && request()->page > 0) {
-            return (request()->page - 1) * $limit;
-        } elseif (request()->page) {
+        if ($currentPage > 0) {
+            return ($currentPage - 1) * $limit;
+        } elseif ($currentPage) {
             abort(404);
-        } else {
-            return 0;
         }
+
+        return 0;
     }
-
-
 }
