@@ -11,10 +11,13 @@ class MicroCms
 
     protected Client $client;
 
+    protected Paginator $paginator;
+
     public function __construct()
     {
         $this->client = new Client();
         $this->convert = new Convert();
+        $this->paginator = new Paginator();
     }
 
     public function get(string $schema, QueryBuilder $queryBuilder): Collection
@@ -25,29 +28,23 @@ class MicroCms
 
     public function getWithPaginate(string $schema, QueryBuilder $queryBuilder): LengthAwarePaginator
     {
-        $currentPage = (int) request()->page;
+        $currentPage = request()->page ?: 1;
 
-        $queryBuilder->limit = 2;
-        $queryBuilder->offset = $this->getOffsetOrFail($queryBuilder->limit, $currentPage);
-
-        $response = $this->get($schema, $queryBuilder);
-
-        return new LengthAwarePaginator(
-            $response['contents'],
-            $response['totalCount'],
-            $response['limit'],
-            $currentPage,
-        );
-    }
-
-    private function getOffsetOrFail(int $limit, int $currentPage): int
-    {
-        if ($currentPage > 0) {
-            return ($currentPage - 1) * $limit;
-        } elseif ($currentPage) {
+        if (!is_numeric($currentPage)) {
             abort(404);
         }
 
-        return 0;
+        if (!isset($queryBuilder->limit)) {
+            $queryBuilder->limit = 15; //default
+        }
+        $queryBuilder->offset = $this->paginator->getOffsetOrFail($queryBuilder->limit, $currentPage);
+
+        $response = $this->get($schema, $queryBuilder);
+
+        if (!$response['contents']) {
+            abort(404);
+        }
+
+        return $this->paginator->paginate($response, $currentPage);
     }
 }
