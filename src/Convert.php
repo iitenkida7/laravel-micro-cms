@@ -21,7 +21,9 @@ class Convert
         $result = collect();
 
         foreach ($content as $key => $value) {
-            if (preg_match('!.*At$!', $key)) {
+            if (is_array($value)) {
+                $result->{$key} = $this->convertContent($value);
+            } elseif (preg_match('!.*At$!', $key)) {
                 $result->{$key} = $this->castTimestamp($value);
             } else {
                 $result->{$key} = $value;
