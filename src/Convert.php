@@ -35,6 +35,7 @@ class Convert
 
     private function castTimestamp(string $timestamp): string
     {
-        return Carbon::parse($timestamp)->timezone('Asia/Tokyo');
+        $timezone = config('app.timezone');
+        return Carbon::parse($timestamp)->timezone($timezone);
     }
 }
